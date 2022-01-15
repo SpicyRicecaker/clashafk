@@ -1,6 +1,11 @@
 use std::env;
 
-use serenity::{Client, client::{EventHandler, Context}, async_trait, model::channel::Message};
+use serenity::{
+    async_trait,
+    client::{Context, EventHandler},
+    model::channel::Message,
+    Client,
+};
 
 struct Handler;
 
@@ -17,8 +22,9 @@ impl EventHandler for Handler {
             // authentication error, or lack of permissions to post in the
             // channel, so log to stdout when some error happens, with a
             // description of it.
+            println!("ping command came through");
             if let Err(why) = msg.channel_id.say(&ctx.http, "Pong!").await {
-                println!("Error sending message: {:?}", why);
+                println!("Error sending message: {why:?}");
             }
         }
     }
@@ -42,7 +48,8 @@ async fn main() {
     //
     // Shards will automatically attempt to reconnect, and will perform
     // exponential backoff until it reconnects.
+    println!("token is {token}");
     if let Err(why) = client.start().await {
-        println!("Client error: {:?}", why);
+        println!("Client error: {why:?}");
     }
 }
