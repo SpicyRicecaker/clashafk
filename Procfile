@@ -1,1 +1,1 @@
-web: ./target/release/clashafk
+worker: ./target/release/clashafk
